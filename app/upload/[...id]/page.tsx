@@ -21,6 +21,10 @@ function generateRandomString(length: number): string {
     return result;
   }
 
+  function joinWithSlash(parts: string[]): string {
+    return parts.join('/');
+}
+
 export default async function Page({
   params,
 }: {
@@ -31,7 +35,16 @@ export default async function Page({
 
     const randomStr = generateRandomString(6)
 
-    const { data: data, error: error } = await supabase.from("url").insert({ url_id: randomStr, redirect_url: url[0]})
+    const { data: countries } = await supabase.from("url").select();
 
-    if (error) console.error(error)
+    const redirectUrl = getRedirectUrl(countries || [], randomStr);
+
+    const joinedUrl = joinWithSlash(url as unknown as string[])
+
+    if (!redirectUrl) {
+
+      const { data: data, error: error } = await supabase.from("url").insert({ url_id: randomStr, redirect_url: joinedUrl})
+
+      if (error) console.error(error)
+    }
 }
