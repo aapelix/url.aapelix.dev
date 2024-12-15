@@ -43,7 +43,7 @@ export default async function Page({
 
     if (!redirectUrl) {
 
-      const { data: data, error: error } = await supabase.from("url").insert({ url_id: randomStr, redirect_url: joinedUrl})
+      const { error: error } = await supabase.from("url").insert({ url_id: randomStr, redirect_url: joinedUrl})
 
       if (error) console.error(error)
     }

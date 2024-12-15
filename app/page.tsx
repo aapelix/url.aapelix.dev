@@ -34,10 +34,10 @@ export default function Home() {
     <Card className="w-full max-w-md p-6 shadow-md hover:shadow-lg transition">
       <CardHeader className="flex flex-col items-center">
         <CardTitle className="text-2xl font-semibold text-center mb-2">
-          Well, actually... it's completely free! 🎉
+          Well, actually... it&apos;s completely free! 🎉
         </CardTitle>
         <CardDescription className="text-zinc-400 text-center">
-          Here's what you get:
+          Here&apos;s what you get:
         </CardDescription>
       </CardHeader>
       <CardContent>
