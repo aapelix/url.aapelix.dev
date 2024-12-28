@@ -1,5 +1,6 @@
 "use client"
 
+import {QRCodeSVG} from 'qrcode.react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -7,9 +8,23 @@ import { useTheme } from "next-themes";
 import { ArrowDown, Github } from "lucide-react";
 import { useState } from "react";
 import { CopyButton } from "@/components/copy-button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { useRef } from "react";
+
 
 export default function Home() {
 
+  const qrCodeRef = useRef<HTMLDivElement>(null);
   const { setTheme } = useTheme()
   const [input, setInput] = useState("")
   const [id, setId] = useState("")
@@ -32,9 +47,34 @@ export default function Home() {
     } else {
       console.log('Error:', data.error);
       setId(data.error)
-    }
-    
+    } 
   }
+
+  const downloadQR = () => {
+    if (!qrCodeRef.current) return;
+
+    const svg = qrCodeRef.current.querySelector("svg");
+    if (!svg) return;
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      if (!ctx) return;
+      ctx.drawImage(img, 0, 0);
+
+      const pngFile = canvas.toDataURL("image/png");
+      const downloadLink = document.createElement("a");
+      downloadLink.href = pngFile;
+      downloadLink.download = "qrcode.png";
+      downloadLink.click();
+    };
+
+    img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
+  };
 
   return (
     <main className="font-mono flex flex-col items-center w-screen justify-center pb-24">
@@ -43,13 +83,47 @@ export default function Home() {
         <h1 className="font-black text-7xl text-center">The easiest way to shorten your urls</h1>
         <div className="flex gap-x-2 mt-5">
           <Input onChange={(e) => setInput(e.target.value)} className="w-96" type="url" placeholder="https://example.com/" />
-          <Button onClick={() => upload()}>Shorten!</Button>
+          <AlertDialog>
+            <AlertDialogTrigger onClick={() => upload()}>Shorten!</AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                {id && (
+                  <>
+                    <AlertDialogTitle>{id == "URL is required" ? id : "Your url was succesfully generated!"}</AlertDialogTitle>
+                <AlertDialogDescription>
+                {id != "URL is required" && (
+                  <div>
+                    <div className='bg-zinc-800 rounded-xl py-2 px-2 flex gap-2 justify-between'><p>https://aapelix.link/{id}</p> <CopyButton text={"https://aapelix.link/" + id} /></div>
+                  </div>
+                )}
+
+                <div className='mt-5 rounded-xl py-2 px-2'>
+                  <div ref={qrCodeRef}>
+                    <QRCodeSVG value={"https://aapelix.link/" + id} />
+                  </div>
+                  <Button className='mt-2' onClick={downloadQR}>Download QR</Button>
+                </div>
+
+                </AlertDialogDescription>
+                  </>
+                )}
+
+                {!id && (
+                  <>
+                    <AlertDialogTitle>Generating your url</AlertDialogTitle>
+                    <AlertDialogDescription>Please wait...</AlertDialogDescription>
+                  </>
+                )
+                }
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogAction>Continue</AlertDialogAction>
+              </AlertDialogFooter>
+              </AlertDialogContent>
+          </AlertDialog>
+          
         </div>
-        {id && (
-          <div>
-            <div className='bg-zinc-800 rounded-xl py-2 px-2 flex gap-2 justify-between'><p>https://aapelix.link/{id}</p> <CopyButton text={"https://aapelix.link/" + id} /></div>
-          </div>
-        )}
+        
         
       </header>
       <p>Read more</p>
