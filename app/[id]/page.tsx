@@ -1,41 +1,42 @@
-import { createClient } from '@/utils/supabase/server';
+{/* <div className='font-mono flex w-screen h-screen items-center justify-center'>
+        <h1 className="text-6xl text-center font-bold font-mono">Redirecting you to {redirectUrl}</h1>
+      </div>
+
+<div className='font-mono flex w-screen h-screen items-center justify-center'>
+        <p className='text-6xl font-bold'>URL not found</p>
+      </div> */}
+
 import { redirect } from 'next/navigation';
+import { createClient } from '@/utils/supabase/server';
 
-type Entry = {
-  id: number;
-  created_at: string;
-  url_id: string;
-  redirect_url: string;
-};
+export default async function RedirectPage({ params }: { params: { id: string } }) {
+  const { id } = await params;
 
-function getRedirectUrl(data: Entry[], urlId: string): string | undefined {
-  const entry = data.find(item => item.url_id === urlId);
-  return entry?.redirect_url;
-}
+  console.log(id)
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const slug = (await params).id;
   const supabase = await createClient();
-  const { data: countries } = await supabase.from("url").select();
 
-  const redirectUrl = getRedirectUrl(countries || [], slug);
+  const { data, error } = await supabase.from('url').select('url').eq('url_id', id).single();
 
-  if (redirectUrl) {
-    redirect("https://" + redirectUrl);
-
-    return (
-        <h1 className="text-6xl text-center font-bold font-mono">Redirecting you</h1>
-    )
-  } else {
-    // Handle the case where the redirect URL is not found
+  if (error) {
     return (
       <div className='font-mono flex w-screen h-screen items-center justify-center'>
         <p className='text-6xl font-bold'>URL not found</p>
       </div>
     );
   }
+
+  if (!data || !data.url) {
+    return (
+      <div className='font-mono flex w-screen h-screen items-center justify-center'>
+        <p className='text-6xl font-bold'>URL not found for ID</p>
+      </div>
+    )
+  }
+
+  
+
+  redirect(data.url.startsWith("https://") ? data.url : "https://" + data.url);
+
+  return null;
 }

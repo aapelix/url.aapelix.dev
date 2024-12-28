@@ -7,13 +7,35 @@ import { useTheme } from "next-themes";
 import { ArrowDown, Github } from "lucide-react";
 import { useState } from "react";
 import { redirect } from 'next/navigation';
+import { CopyButton } from "@/components/copy-button";
 
 export default function Home() {
 
   const { setTheme } = useTheme()
   const [input, setInput] = useState("")
+  const [id, setId] = useState("")
 
   setTheme("dark")
+
+  const upload = async () => {
+    const response = await fetch('/api/upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ url: 'https://aapelix.dev' }),
+    });
+    
+    const data = await response.json();
+    if (data.url_id) {
+      console.log('Generated URL ID:', data.url_id);
+      setId(data.url_id)
+    } else {
+      console.log('Error:', data.error);
+    }
+    
+  }
+
 
   return (
     <main className="font-mono flex flex-col items-center w-screen justify-center pb-24">
@@ -21,9 +43,15 @@ export default function Home() {
       <header className="w-1/2 h-[94vh] flex justify-center items-center flex-col gap-3 relative">
         <h1 className="font-black text-7xl text-center">The easiest way to shorten your urls</h1>
         <div className="flex gap-x-2 mt-5">
-          <Input onChange={(e) => setInput(e.target.value)} className="focus:w-96" type="url" placeholder="https://example.com" />
-          <Button onClick={() => redirect("upload/" + input.replace("https://", "").replace("http://", ""))}>Shorten!</Button>
+          <Input onChange={(e) => setInput(e.target.value)} className="w-96" type="url" placeholder="https://example.com/" />
+          <Button onClick={() => upload()}>Shorten!</Button>
         </div>
+        {id && (
+          <div>
+            <div className='bg-zinc-800 rounded-xl py-2 px-2 flex gap-2 justify-between'><p>https://aapelix.link/{id}</p> <CopyButton text={"https://aapelix.link/" + id} /></div>
+          </div>
+        )}
+        
       </header>
       <p>Read more</p>
       <ArrowDown />
