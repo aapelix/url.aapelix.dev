@@ -1,12 +1,10 @@
-// File: app/api/url/route.ts
-
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 
 export async function GET(req: Request) {
   try {
-    const url = new URL(req.url); // Parse the URL of the request
-    const urlId = url.searchParams.get('url_id'); // Get the url_id from query parameters
+    const url = new URL(req.url);
+    const urlId = url.searchParams.get('url_id');
 
     if (!urlId) {
       return NextResponse.json({ error: 'url_id is required' }, { status: 400 });
