@@ -20,6 +20,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { useRef } from "react";
+import { redirect } from 'next/navigation';
 
 
 export default function Home() {
@@ -84,7 +85,7 @@ export default function Home() {
         <div className="flex gap-x-2 mt-5">
           <Input onChange={(e) => setInput(e.target.value)} className="w-96" type="url" placeholder="https://example.com/" />
           <AlertDialog>
-            <AlertDialogTrigger onClick={() => upload()}>Shorten!</AlertDialogTrigger>
+            <AlertDialogTrigger className='bg-white text-black px-2 rounded-md' onClick={() => upload()}>Shorten!</AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
                 {id && (
@@ -117,7 +118,7 @@ export default function Home() {
                 }
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel></AlertDialogCancel>
+                <AlertDialogCancel onClick={() => redirect("https://aapelix.link/" + id)}>Go to site</AlertDialogCancel>
                 <AlertDialogAction>Continue</AlertDialogAction>
               </AlertDialogFooter>
               </AlertDialogContent>
