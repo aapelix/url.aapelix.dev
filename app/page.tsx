@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes";
 import { ArrowDown, Github } from "lucide-react";
 import { useState } from "react";
-import { redirect } from 'next/navigation';
 import { CopyButton } from "@/components/copy-button";
 
 export default function Home() {
@@ -23,7 +22,7 @@ export default function Home() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ url: 'https://aapelix.dev' }),
+      body: JSON.stringify({ url: input }),
     });
     
     const data = await response.json();
@@ -32,10 +31,10 @@ export default function Home() {
       setId(data.url_id)
     } else {
       console.log('Error:', data.error);
+      setId(data.error)
     }
     
   }
-
 
   return (
     <main className="font-mono flex flex-col items-center w-screen justify-center pb-24">
