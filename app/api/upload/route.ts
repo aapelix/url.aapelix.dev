@@ -31,7 +31,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'URL already exists' }, { status: 400 });
     }
 
-    const { data, error: insertError } = await supabase.from("url").insert([{ url, url_id: randomStr }]).select();
+    const { error: insertError } = await supabase.from("url").insert([{ url, url_id: randomStr }]);
 
     if (insertError) {
       return NextResponse.json({ error: 'Error inserting URL' }, { status: 500 });

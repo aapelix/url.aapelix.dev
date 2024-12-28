@@ -69,7 +69,7 @@ export default function Home() {
       const pngFile = canvas.toDataURL("image/png");
       const downloadLink = document.createElement("a");
       downloadLink.href = pngFile;
-      downloadLink.download = "qrcode.png";
+      downloadLink.download = id + ".png";
       downloadLink.click();
     };
 
@@ -117,6 +117,7 @@ export default function Home() {
                 }
               </AlertDialogHeader>
               <AlertDialogFooter>
+                <AlertDialogCancel></AlertDialogCancel>
                 <AlertDialogAction>Continue</AlertDialogAction>
               </AlertDialogFooter>
               </AlertDialogContent>
