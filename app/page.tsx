@@ -46,6 +46,7 @@ export default function Home() {
     if (data.url_id) {
       console.log('Generated URL ID:', data.url_id);
       setId(data.url_id)
+      setInput("")
     } else {
       console.log('Error:', data.error);
       setId(data.error)
@@ -108,17 +109,20 @@ export default function Home() {
                     <AlertDialogTitle>{id == "URL is required" ? id : "Your url was succesfully generated!"}</AlertDialogTitle>
                 <AlertDialogDescription>
                 {id != "URL is required" && (
-                  <div>
-                    <div className='bg-zinc-800 rounded-xl py-2 px-2 flex gap-2 justify-between'><p>https://aapelix.link/{id}</p> <CopyButton text={"https://aapelix.link/" + id} /></div>
-                  </div>
+                  <>
+                    <div>
+                      <div className='bg-zinc-800 rounded-xl py-2 px-2 flex gap-2 justify-between'><p>https://aapelix.link/{id}</p> <CopyButton text={"https://aapelix.link/" + id} /></div>
+                    </div>
+
+                    <div className='mt-5 rounded-xl py-2 px-2'>
+                      <div ref={qrCodeRef}>
+                        <QRCodeSVG value={"https://aapelix.link/" + id} />
+                      </div>
+                      <Button className='mt-2' onClick={downloadQR}>Download QR</Button>
+                    </div>
+                  </>
                 )}
 
-                <div className='mt-5 rounded-xl py-2 px-2'>
-                  <div ref={qrCodeRef}>
-                    <QRCodeSVG value={"https://aapelix.link/" + id} />
-                  </div>
-                  <Button className='mt-2' onClick={downloadQR}>Download QR</Button>
-                </div>
 
                 </AlertDialogDescription>
                   </>
