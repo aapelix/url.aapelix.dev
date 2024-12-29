@@ -16,16 +16,16 @@ export default async function Page({
 
   if (error) {
     return (
-      <div className='font-mono flex w-screen h-screen items-center justify-center'>
-        <p className='text-6xl font-bold'>ID was found but no URL</p>
+      <div className='font-mono flex w-screen h-screen items-center justify-center text-center'>
+        <p className='text-6xl font-bold'>ID not found</p>
       </div>
     );
   }
 
   if (!data || !data.url) {
     return (
-      <div className='font-mono flex w-screen h-screen items-center justify-center'>
-        <p className='text-6xl font-bold'>URL not found for ID</p>
+      <div className='font-mono flex w-screen h-screen items-center justify-center text-center'>
+        <p className='text-6xl font-bold'>ID was found but no URL</p>
         <p>{id}</p>
       </div>
     )
