@@ -25,6 +25,7 @@ import { redirect } from 'next/navigation';
 
 export default function Home() {
 
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const qrCodeRef = useRef<HTMLDivElement>(null);
   const { setTheme } = useTheme()
   const [input, setInput] = useState("")
@@ -77,15 +78,29 @@ export default function Home() {
     img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      upload()
+      setIsDialogOpen(true)
+    }
+  }
+
   return (
     <main className="font-mono flex flex-col items-center w-screen justify-center pb-24">
       <div className="flex items-center flex-col mb-7">
-      <header className="w-1/2 h-[94vh] flex justify-center items-center flex-col gap-3 relative">
-        <h1 className="font-black text-7xl text-center">The easiest way to shorten your urls</h1>
-        <div className="flex gap-x-2 mt-5">
-          <Input onChange={(e) => setInput(e.target.value)} className="w-96" type="url" placeholder="https://example.com/" />
-          <AlertDialog>
-            <AlertDialogTrigger className='bg-white text-black px-2 rounded-md' onClick={() => upload()}>Shorten!</AlertDialogTrigger>
+      <header className="md:w-1/2 w-full h-[94vh] flex justify-center items-center flex-col gap-3 relative">
+        <h1 className="font-black md:text-7xl text-5xl text-center">The easiest way to shorten your urls</h1>
+        <div className="flex gap-x-2 mt-5 flex-wrap items-center justify-center gap-y-2">
+          <Input
+           onChange={(e) => setInput(e.target.value)} 
+           onKeyDown={handleKeyDown}
+           className="w-96" 
+           type="url" 
+           placeholder="https://example.com/" 
+          />
+          <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <AlertDialogTrigger className='bg-white text-black px-2 rounded-md py-1 md:w-max w-96' onClick={() => upload()}>Shorten!</AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
                 {id && (
@@ -131,7 +146,7 @@ export default function Home() {
       <p>Read more</p>
       <ArrowDown />
       </div>
-      <section className="flex flex-col items-center py-10">
+      <section className="flex flex-col items-center py-10 px-2">
   <h1 className="text-6xl text-center font-extrabold mb-10">Pricing</h1>
   <div className="flex flex-wrap justify-center gap-6">
     <Card className="w-full max-w-md p-6 shadow-md hover:shadow-lg transition">

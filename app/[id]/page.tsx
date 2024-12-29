@@ -17,7 +17,7 @@ export default async function Page({
   if (error) {
     return (
       <div className='font-mono flex w-screen h-screen items-center justify-center'>
-        <p className='text-6xl font-bold'>URL not found</p>
+        <p className='text-6xl font-bold'>ID was found but no URL</p>
       </div>
     );
   }
@@ -26,6 +26,7 @@ export default async function Page({
     return (
       <div className='font-mono flex w-screen h-screen items-center justify-center'>
         <p className='text-6xl font-bold'>URL not found for ID</p>
+        <p>{id}</p>
       </div>
     )
   }
