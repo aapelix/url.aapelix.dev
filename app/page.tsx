@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { useRef } from "react";
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
 
 
 export default function Home() {
@@ -145,7 +146,7 @@ export default function Home() {
           
         </div>
         
-        <p className="text-zinc-400 text-center px-4">By shortining an url, you agree to the <a href="/tos" className="text-zinc-400 font-bold">Terms Of Service</a></p>
+        <p className="text-zinc-400 text-center px-4">By shortining an url, you agree to the <Link href="/tos" className="text-zinc-400 font-bold">Terms Of Service</Link></p>
         
       </header>
       <p>Read more</p>

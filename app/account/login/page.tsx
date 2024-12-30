@@ -3,6 +3,7 @@ import { login, signup } from './actions'
 import { Input } from "@/components/ui/input"
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
+import { Link } from 'lucide-react'
 
 export default function LoginPage() {
   return (
@@ -18,7 +19,7 @@ export default function LoginPage() {
                     <Button className='w-full' formAction={login}>Log in</Button>
                     <Button className='w-full' formAction={signup}>Sign up</Button>
                 </div>
-                <a className='text-zinc-400' href="/account/resetpw">Don&acute;tcha remember yer password?</a>
+                <Link className='text-zinc-400' href="/account/resetpw">Don&acute;tcha remember yer password?</Link>
             </form>
             </CardContent>
         </Card>

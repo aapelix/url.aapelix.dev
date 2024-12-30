@@ -23,8 +23,8 @@ export default function Page() {
 
                 <h2 className="text-2xl font-bold mt-5">3. Reporting Abuse</h2>
                 <p>
-                    If you encounter a shortened URL that violates these Terms of Service, please report it to us immediately by creating a ticket at <a href="/report/" className="font-bold">aapelix.link/report/</a> or by emailing {" "}
-                    <a href="mailto:abuse@aapelix.link" className="font-bold">abuse@aapelix.link</a>. Provide the shortened URL and any relevant details about the abuse.
+                    If you encounter a shortened URL that violates these Terms of Service, please report it to us immediately by creating a ticket at <Link href="/report/" className="font-bold">aapelix.link/report/</Link> or by emailing {" "}
+                    <Link href="mailto:abuse@aapelix.link" className="font-bold">abuse@aapelix.link</Link>. Provide the shortened URL and any relevant details about the abuse.
                 </p>
 
                 <h2 className="text-2xl font-bold mt-5">4. Account Suspension</h2>
@@ -34,7 +34,7 @@ export default function Page() {
 
                 <h2 className="text-2xl font-bold mt-5">5. Limitation of Liability</h2>
                 <p>
-                    aapelix.link is provided "as is" without any warranties. We are not responsible for the content of shortened URLs or damages resulting from their use.
+                    aapelix.link is provided &quot;as is&quot; without any warranties. We are not responsible for the content of shortened URLs or damages resulting from their use.
                 </p>
 
                 <h2 className="text-2xl font-bold mt-5">6. Modifications to Terms</h2>
@@ -45,7 +45,7 @@ export default function Page() {
                 <h2 className="text-2xl font-bold mt-5">7. Contact Us</h2>
                 <p>
                     For questions or concerns about these Terms of Service, contact us at {" "}
-                    <a href="mailto:support@aapelix.link">support@aapelix.link</a>
+                    <Link href="mailto:support@aapelix.link">support@aapelix.link</Link>
                 </p>
             </div>
         </div>
