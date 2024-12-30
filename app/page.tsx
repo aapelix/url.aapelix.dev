@@ -145,8 +145,7 @@ export default function Home() {
           
         </div>
         
-        <p className="text-zinc-400">By shortining an url, you agree to the <a href="/tos" className="text-zinc-400 font-bold">Terms Of Service</a></p>
-        
+        <p className="text-zinc-400 text-center px-4">By shortining an url, you agree to the <a href="/tos" className="text-zinc-400 font-bold">Terms Of Service</a></p>
         
       </header>
       <p>Read more</p>

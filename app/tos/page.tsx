@@ -1,7 +1,9 @@
+import Link from "next/link";
+
 export default function Page() {
     return (
         <div className="font-mono flex flex-col w-screen items-center justify-center pb-20 pt-20">
-            <a className="w-1/2 mb-10 text-zinc-400" href="/">← Back</a>
+            <Link className="w-1/2 mb-10 text-zinc-400" href="/">← Back</Link>
             <p className="text-6xl font-bold text-center">Terms Of Service</p>
             <div className="w-1/2 mt-10 flex flex-col gap-2">
                 <h2 className="text-2xl font-bold mt-5">1. Acceptance of Terms</h2>
