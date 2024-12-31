@@ -3,7 +3,7 @@
 import { Check, Copy } from "lucide-react";
 import { useState } from "react";
 
-export const CopyButton = ({ text }: {text: string}) => {
+export const CopyButton = ({ text, size }: {text: string, size?: string}) => {
 
     const [copied, setCopied] = useState(false);
 
@@ -19,7 +19,7 @@ export const CopyButton = ({ text }: {text: string}) => {
 
   return (
     <button onClick={copy} className="flex items-center gap-2">
-        {copied ? <Check /> : <Copy />}
+        {copied ? <Check size={size} /> : <Copy size={size} />}
     </button>
   )
 }

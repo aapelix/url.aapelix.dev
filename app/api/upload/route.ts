@@ -31,10 +31,20 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'URL already exists' }, { status: 400 });
     }
 
-    const { error: insertError } = await supabase.from("url").insert([{ url, url_id: randomStr }]);
+    const { data: { user } } = await supabase.auth.getUser();
 
-    if (insertError) {
-      return NextResponse.json({ error: 'Error inserting URL' }, { status: 500 });
+    if (user) {
+      const { error: insertError } = await supabase.from("url").insert([{ url, url_id: randomStr, user_id: user.id }]);
+      
+      if (insertError) {
+        return NextResponse.json({ error: 'Error inserting URL' }, { status: 500 });
+      }
+    } else {
+      const { error: insertError } = await supabase.from("url").insert([{ url, url_id: randomStr }]);
+
+      if (insertError) {
+        return NextResponse.json({ error: 'Error inserting URL' }, { status: 500 });
+      }
     }
 
     return NextResponse.json({ url_id: randomStr }, { status: 200 });

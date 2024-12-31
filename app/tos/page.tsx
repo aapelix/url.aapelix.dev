@@ -2,8 +2,7 @@ import Link from "next/link";
 
 export default function Page() {
     return (
-        <div className="font-mono flex flex-col w-screen items-center justify-center pb-20 pt-20">
-            <Link className="w-1/2 mb-10 text-zinc-400" href="/">← Back</Link>
+        <div className="font-mono flex flex-col w-screen items-center justify-center pb-20 pt-44">
             <p className="text-6xl font-bold text-center">Terms Of Service</p>
             <div className="w-1/2 mt-10 flex flex-col gap-2">
                 <h2 className="text-2xl font-bold mt-5">1. Acceptance of Terms</h2>
@@ -24,7 +23,7 @@ export default function Page() {
                 <h2 className="text-2xl font-bold mt-5">3. Reporting Abuse</h2>
                 <p>
                     If you encounter a shortened URL that violates these Terms of Service, please report it to us immediately by creating a ticket at <Link href="/report/" className="font-bold">aapelix.link/report/</Link> or by emailing {" "}
-                    <Link href="mailto:abuse@aapelix.link" className="font-bold">abuse@aapelix.link</Link>. Provide the shortened URL and any relevant details about the abuse.
+                    <Link href="mailto:aapelix@duck.com" className="font-bold">aapelix@duck.com</Link>. Provide the shortened URL and any relevant details about the abuse.
                 </p>
 
                 <h2 className="text-2xl font-bold mt-5">4. Account Suspension</h2>
@@ -45,7 +44,7 @@ export default function Page() {
                 <h2 className="text-2xl font-bold mt-5">7. Contact Us</h2>
                 <p>
                     For questions or concerns about these Terms of Service, contact us at {" "}
-                    <Link href="mailto:support@aapelix.link">support@aapelix.link</Link>
+                    <Link href="mailto:aapelix@duck.com">aapelix@duck.com</Link>
                 </p>
             </div>
         </div>

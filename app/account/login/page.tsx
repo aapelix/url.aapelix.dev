@@ -19,7 +19,7 @@ export default function LoginPage() {
                     <Button className='w-full' formAction={login}>Log in</Button>
                     <Button className='w-full' formAction={signup}>Sign up</Button>
                 </div>
-                <Link className='text-zinc-400' href="/account/resetpw">Don&acute;tcha remember yer password?</Link>
+                <Link href="/account/resetpw">Don&acute;tcha remember yer password?</Link>
             </form>
             </CardContent>
         </Card>

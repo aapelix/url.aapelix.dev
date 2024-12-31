@@ -36,7 +36,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NavBar isSignedIn={false} />
+          <NavBar />
           {children}
         </ThemeProvider>
       </body>

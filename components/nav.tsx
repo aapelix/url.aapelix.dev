@@ -1,17 +1,21 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
-import { getSignedIn } from "@/app/actions";
+import { useState, useEffect } from "react";
+import { getSignedIn } from "@/app/actions"; // Assuming this fetches the signed-in status.
 
-export async function getServerSideProps() {
-    const isSignedIn = await getSignedIn();
-    return { props: { isSignedIn } };
-}
-
-export default function NavBar({ isSignedIn }: { isSignedIn: boolean }) {
+export default function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
+    const [isSignedIn, setIsSignedIn] = useState<boolean | undefined>(undefined);
+    useEffect(() => {
+        async function fetchSignInStatus() {
+            const signedInStatus = await getSignedIn();
+            setIsSignedIn(signedInStatus);
+        }
+
+        fetchSignInStatus();
+    }, []);
 
     return (
         <nav className="text-zinc-100 w-screen p-4 flex justify-between items-center fixed bg-[#09090b]/80 backdrop-blur-md md:backdrop-blur-none md:bg-transparent md:bg-gradient-to-b from-[#09090b] to-[#09090b00] z-50">
@@ -36,7 +40,9 @@ export default function NavBar({ isSignedIn }: { isSignedIn: boolean }) {
                 </Link>
             </div>
             <div className="md:flex gap-4 absolute right-4 hidden">
-                {isSignedIn ? (
+                {isSignedIn === undefined ? (
+                    <p>Loading...</p>
+                ) : isSignedIn ? (
                     <>
                         <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/account/dashboard">
                             <p>Dashboard</p>
@@ -64,41 +70,42 @@ export default function NavBar({ isSignedIn }: { isSignedIn: boolean }) {
                 </button>
             </div>
             {isOpen && (
-    <div className="md:hidden absolute top-16 left-0 w-full bg-[#09090b]/80 backdrop-blur-md flex flex-col items-center gap-4 p-4 h-screen pt-24">
-        <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/">
-            <p>Shorten!</p>
-        </Link>
-        <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/tos">
-            <p>Terms Of Service</p>
-        </Link>
-        <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/report">
-            <p>Report</p>
-        </Link>
-        <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/support">
-            <p>Support</p>
-        </Link>
-        {isSignedIn ? (
-            <>
-                <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/account/dashboard">
-                    <p>Dashboard</p>
-                </Link>
-                <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/account/logout">
-                    <p>Logout</p>
-                </Link>
-            </>
-        ) : (
-            <>
-                <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/account/login">
-                    <p>Sign up</p>
-                </Link>
-                <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300 font-bold" href="/account/login">
-                    <p>Login</p>
-                </Link>
-            </>
-        )}
-    </div>
-)}
-
+                <div className="md:hidden absolute top-16 left-0 w-full bg-[#09090b]/80 backdrop-blur-md flex flex-col items-center gap-4 p-4 h-screen pt-24">
+                    <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/">
+                        <p>Shorten!</p>
+                    </Link>
+                    <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/tos">
+                        <p>Terms Of Service</p>
+                    </Link>
+                    <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/report">
+                        <p>Report</p>
+                    </Link>
+                    <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/support">
+                        <p>Support</p>
+                    </Link>
+                    {isSignedIn === undefined ? (
+                        <p>Loading...</p>
+                    ) : isSignedIn ? (
+                        <>
+                            <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/account/dashboard">
+                                <p>Dashboard</p>
+                            </Link>
+                            <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/account/logout">
+                                <p>Logout</p>
+                            </Link>
+                        </>
+                    ) : (
+                        <>
+                            <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/account/login">
+                                <p>Sign up</p>
+                            </Link>
+                            <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300 font-bold" href="/account/login">
+                                <p>Login</p>
+                            </Link>
+                        </>
+                    )}
+                </div>
+            )}
         </nav>
     );
 }
