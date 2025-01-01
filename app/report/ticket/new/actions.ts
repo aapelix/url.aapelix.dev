@@ -12,10 +12,8 @@ export async function getUser() {
     return user
 }
 
-export async function createTicket({ email, url_id, type, description, connected}: { email?: string, url_id: string, type: string, description: string, connected: boolean }) {
+export async function createTicket({ email, url_id, type, description}: { email?: string, url_id: string, type: string, description: string}) {
     const supabase = await createClient()
-
-    connected ? console.log("connected") : console.log("not connected")
 
     const { data, error } = await supabase.from("tickets").insert([
         {

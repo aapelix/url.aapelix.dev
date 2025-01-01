@@ -4,7 +4,6 @@ import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@
 import { redirect } from 'next/navigation'
 import { DeleteButton } from '@/components/delete-button'
 import { createClient } from '@/utils/supabase/server'
-import { Button } from '@/components/ui/button'
 import QuickActions from './quick-actions'
 
 export default async function Dashboard() {
@@ -49,7 +48,7 @@ export default async function Dashboard() {
               </TableHeader>
               {url_data && url_data.length > 0 && (
                 <TableBody>
-                  {url_data.map((url: any) => (
+                  {url_data.map((url: {url_id: string, url: string, created_at: string, id: number}) => (
                     <TableRow key={url.url_id}>
                       <TableCell>
                         <div className='flex gap-2'>

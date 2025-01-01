@@ -36,7 +36,7 @@ export default function Page() {
 
     const handleSubmit = () => {
         if (!urlId || !selected) return;
-        createTicket({ email: user ?? undefined, url_id: urlId, type: selected ?? "", description, connected });
+        createTicket({ email: user ?? undefined, url_id: urlId, type: selected ?? "", description });
     }
 
     return (
