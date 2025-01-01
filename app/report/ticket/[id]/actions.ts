@@ -38,11 +38,10 @@ export async function addMessage(ticketId: string, sender: string, messageConten
 
   const updatedMessages = ticket?.messages ? [...ticket.messages, newMessage] : [newMessage];
 
-  const { data, error: updateError } = await supabase
+  const { error: updateError } = await supabase
     .from('tickets')
     .update({ messages: updatedMessages })
     .eq('id', ticketId)
-    .select();
 
   if (updateError) {
     console.error('Error updating messages:', updateError);
