@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
 export async function getUser() {
     const supabase = await createClient()
@@ -23,7 +24,7 @@ export async function createTicket({ email, url_id, type, description}: { email?
             status: "open",
             messages: [
                 {
-                    sender: "system",
+                    sender: email ?? "You",
                     message: description,
                     timestamp: new Date().toISOString()
                 }
@@ -36,11 +37,9 @@ export async function createTicket({ email, url_id, type, description}: { email?
         return;
     }
 
-    console.log(data[0].id)
-
     //redirect to ticket page
+    redirect(`/report/ticket/${data[0].id}`)
 }
-
 
 export async function addMessage(ticketId: string, sender: string, messageContent: string) {
 
@@ -56,4 +55,4 @@ export async function addMessage(ticketId: string, sender: string, messageConten
     });
   
     if (error) console.error(error);
-  }
+}

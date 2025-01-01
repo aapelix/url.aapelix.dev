@@ -22,7 +22,7 @@ export default function Page() {
 
                 <h2 className="text-2xl font-bold mt-5">3. Reporting Abuse</h2>
                 <p>
-                    If you encounter a shortened URL that violates these Terms of Service, please report it to us immediately by creating a ticket at <Link href="/report/" className="font-bold">aapelix.link/report/</Link> or by emailing {" "}
+                    If you encounter a shortened URL that violates these Terms of Service, please report it to us immediately by creating a ticket at <Link href="/report/ticket/new" className="font-bold">aapelix.link/report/</Link> or by emailing {" "}
                     <Link href="mailto:aapelix@duck.com" className="font-bold">aapelix@duck.com</Link>. Provide the shortened URL and any relevant details about the abuse.
                 </p>
 
