@@ -50,7 +50,7 @@ export default function Page() {
                             <Input id="email" name="email" type="email" placeholder="hello@aapelix.dev" value={user ?? ""} onChange={(e) => setUser(e.target.value)} />
                             <div className="flex items-center gap-2">
                                 <Switch id="connected" checked={connected} onCheckedChange={setConnected} />
-                                <Label htmlFor="connected">Connect this ticket to my account I'm signed in with (recommended)</Label>
+                                <Label htmlFor="connected">Connect this ticket to my account I&apos;m signed in with (recommended)</Label>
                             </div>
                             <Label htmlFor="url_id">URL ID</Label>
                             <Input id="url_id" name="url_id" type="text" placeholder="abc123" onChange={(e) => setUrlId(e.target.value)} value={urlId} />
