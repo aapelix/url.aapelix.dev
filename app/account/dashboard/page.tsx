@@ -2,9 +2,10 @@ import { CopyButton } from '@/components/copy-button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table'
 import { redirect } from 'next/navigation'
-import { deleteUrl } from './actions'
 import { DeleteButton } from '@/components/delete-button'
 import { createClient } from '@/utils/supabase/server'
+import { Button } from '@/components/ui/button'
+import QuickActions from './quick-actions'
 
 export default async function Dashboard() {
   const supabase = await createClient()
@@ -25,15 +26,12 @@ export default async function Dashboard() {
     console.log('User URLs:', url_data)
   }
 
-  const handleDelete = async (urlId: string) => {
-    await deleteUrl(urlId)
-  }
-
   return (
     <div className='flex flex-col w-full h-screen items-center'>
-      <div className='flex-col flex w-1/2 text-left pt-44'>
+      <div className='flex-col flex md:w-1/2 w-full px-2 text-left pt-44'>
         <h1 className='text-zinc-400'>Dashboard</h1>
-        <p className='text-6xl font-bold'>Welcome, <br /> {data.user.email}</p>
+        <p className='md:text-6xl text-4xl font-bold'>Welcome, <br /> {data.user.email}</p>
+        <QuickActions />
         <Card className='mt-8'>
           <CardHeader>
             <CardTitle>Your URLs</CardTitle>

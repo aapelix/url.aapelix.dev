@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { getSignedIn } from "@/app/actions"; // Assuming this fetches the signed-in status.
+import { getSignedIn } from "@/app/actions";
 
 export default function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -47,9 +47,6 @@ export default function NavBar() {
                         <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/account/dashboard">
                             <p>Dashboard</p>
                         </Link>
-                        <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/account/logout">
-                            <p>Logout</p>
-                        </Link>
                     </>
                 ) : (
                     <>
@@ -89,9 +86,6 @@ export default function NavBar() {
                         <>
                             <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/account/dashboard">
                                 <p>Dashboard</p>
-                            </Link>
-                            <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/account/logout">
-                                <p>Logout</p>
                             </Link>
                         </>
                     ) : (
