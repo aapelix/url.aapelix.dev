@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "url.aapelix.dev",
+  title: "aapelix.link",
   description: "The URL shortener for the modern web",
 };
 
