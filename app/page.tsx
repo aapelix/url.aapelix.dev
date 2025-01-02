@@ -3,11 +3,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, MotionProps } from "motion/react";
 import { QRCodeSVG } from 'qrcode.react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
-import { ArrowDown, Github, Sparkles, Rocket, Shield, ChartBar, Coffee, MousePointer2, Twitter, ExternalLink, Mail, Heart, Code, MessageCircle, } from "lucide-react";
+import { ArrowDown, Github, Sparkles, Rocket, Shield, ChartBar, Coffee, Twitter, Mail, Heart, MessageCircle, } from "lucide-react";
 import { CopyButton } from "@/components/copy-button";
 import {
   AlertDialog,
@@ -28,7 +28,7 @@ const FloatingCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   
   useEffect(() => {
-    const handleMouseMove = (e: { clientX: any; clientY: any; }) => {
+    const handleMouseMove = (e: { clientX: number; clientY: number; }) => {
       setPosition({ x: e.clientX, y: e.clientY });
     };
     window.addEventListener('mousemove', handleMouseMove);
@@ -225,6 +225,7 @@ export default function Home() {
                 className="w-96 bg-zinc-800 border-zinc-700 focus:ring-white/20 transition-all duration-300"
                 type="url"
                 placeholder="https://example.com/"
+                onKeyDown={handleKeyDown}
               />
             </motion.div>
             
