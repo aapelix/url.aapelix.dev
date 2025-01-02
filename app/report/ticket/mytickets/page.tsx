@@ -18,6 +18,10 @@ export default async function Page() {
         .select('*')
         .eq('user_id', data.user.id)
 
+    if (errorT) {
+        console.error('Error fetching tickets:', errorT)
+    }
+
     return (
         <div className="w-screen flex justify-center">
             <div className="w-full md:w-1/2 pt-44">
@@ -60,7 +64,7 @@ export default async function Page() {
                         ))}
                     </>
                 ) : (
-                    <p>You don't have any tickets yet.</p>
+                    <p>You don&apos;t have any tickets yet.</p>
                 )}
             </div>
         </div>
