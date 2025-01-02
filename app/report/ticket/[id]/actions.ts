@@ -48,3 +48,14 @@ export async function addMessage(ticketId: string, sender: string, messageConten
   }
 
 }
+
+export async function setTicketStatus(id: string, status: string) {
+  const supabase = await createClient()
+
+  const { error } = await supabase.from("tickets").update({ status: status }).eq("id", id)
+
+  if (error) {
+    console.error(error)
+    return
+  }
+}

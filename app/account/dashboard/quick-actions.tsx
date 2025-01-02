@@ -10,6 +10,7 @@ export default function QuickActions() {
           <div className='flex gap-2 mt-2 flex-wrap'>
             <Button onClick={() => redirect("/")} >Shorten url</Button>
             <Button onClick={() => redirect("/report/ticket/new")} >Create ticket</Button>
+            <Button onClick={() => redirect("/report/ticket/mytickets")}>View my tickets</Button>
             <Button onClick={() => redirect("/account/logout")}>Logout</Button>
           </div>
         </div>

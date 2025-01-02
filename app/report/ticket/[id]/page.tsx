@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { addMessage, getTicket } from "./actions";
+import { addMessage, getTicket, setTicketStatus } from "./actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SendHorizonal } from "lucide-react";
@@ -86,10 +86,11 @@ export default function Page() {
                                         ))}
                                     </div>
                                     <div className="flex items-center mt-2 pb-12">
-                                        <Input onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)} placeholder="Message..." className="flex-grow" />
+                                        <Input disabled={ticket.status === "closed"} onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)} placeholder="Message..." className="flex-grow" />
                                         <Button 
                                             onClick={handleSubmit}
                                             className="ml-2"
+                                            disabled={ticket.status === "closed"}
                                         >
                                             <SendHorizonal />
                                         </Button>
@@ -119,7 +120,16 @@ export default function Page() {
                                         <p className="font-bold">{ticket.email}</p>
                                     </div>
                                     <div className="flex gap-2 translate-y-20">
-                                        <Button>Close ticket</Button>
+
+                                        {ticket.status === "open" ? <Button onClick={() => {
+                                            setTicketStatus(ticket.id, "closed")
+                                            setTicket({ ...ticket, status: "closed" });
+                                        }}>Close ticket</Button> : <Button onClick={() => {
+                                            setTicketStatus(ticket.id, "open")
+                                            setTicket({ ...ticket, status: "open" });
+                                        }}>Reopen ticket</Button>}
+
+                                        
                                     </div>
                                     </div>
                                 </CardContent>

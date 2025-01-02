@@ -35,9 +35,6 @@ export default function NavBar() {
                 <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/report">
                     <p>Report</p>
                 </Link>
-                <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/support">
-                    <p>Support</p>
-                </Link>
             </div>
             <div className="md:flex gap-4 absolute right-4 hidden">
                 {isSignedIn === undefined ? (
@@ -76,9 +73,6 @@ export default function NavBar() {
                     </Link>
                     <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/report">
                         <p>Report</p>
-                    </Link>
-                    <Link className="hover:bg-zinc-900 px-2 py-2 rounded-md duration-300" href="/support">
-                        <p>Support</p>
                     </Link>
                     {isSignedIn === undefined ? (
                         <p>Loading...</p>
